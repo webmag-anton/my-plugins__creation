@@ -45,25 +45,36 @@ $.modal = function (options) {
 	// удобно называть DOM-node элементы начиная с символа $, что б отличать от обычных переменных
 	const $modal = _createModal(options)
 
-	let _animationDurationMs = (typeof options.duration == 'number' && options.duration) || 300
+	let _animationDurationMs = (typeof options.duration == 'number' && options.duration) || 300 
 
-	function closeHandler(e) {
-		if (e.target == $modal.querySelector('.modal-close') || e.target == $modal.querySelector('.modal-overlay')) {
-			$modal.classList.remove('open')
-		}
-	}
+	// создаем событие открытия модалки
+	let openEvent = new CustomEvent('modalOpen')
+	// создаем событие закрытия модалки
+	let closeEvent = new CustomEvent('modalClose')
+	// создаем событие перед закрытием модалки
+	let beforeCloseEvent = new CustomEvent('beforeModalClose')
 
-	if (typeof options.closable == 'boolean' && options.closable) {
-		$modal.classList.add('closable')
-		$modal.addEventListener('click', closeHandler)
-	} 
-
-	return { // возвращаем объект с методами модалки
+	let modalMethods = { // возвращаем объект с методами модалки
 		open() {
 			$modal.classList.add('open')
+			// запускаем событие 
+			setTimeout( () => {
+				$modal.dispatchEvent(openEvent)
+			}, _animationDurationMs)
 		},
 		close() {
+			let agreement = confirm('Закрыть модалку?')
+			if (agreement) {
+				$modal.dispatchEvent(beforeCloseEvent)
+			} else {
+				return
+			}
+
 			$modal.classList.remove('open')
+			// запускаем событие 
+			setTimeout( () => {
+				$modal.dispatchEvent(closeEvent)
+			}, _animationDurationMs)
 		},
 		destroy() {
 			if ($modal.classList.contains('open')) {
@@ -76,6 +87,28 @@ $.modal = function (options) {
 		},
 		setContent(newContent) {
 			$modal.querySelector('.modal-body').textContent = newContent
+		},
+		onOpen(func) {
+			$modal.addEventListener('modalOpen', func)
+		},
+		onClose(func) {
+			$modal.addEventListener('modalClose', func)
+		},
+		beforeClose(func) {
+			$modal.addEventListener('beforeModalClose', func)
 		}
 	}
+
+	function closeHandler(e) {
+		if (e.target == $modal.querySelector('.modal-close') || e.target == $modal.querySelector('.modal-overlay')) {
+			modalMethods.close()
+		}
+	}
+
+	if (typeof options.closable == 'boolean' && options.closable) {
+		$modal.classList.add('closable')
+		$modal.addEventListener('click', closeHandler)
+	}
+
+	return modalMethods
 }

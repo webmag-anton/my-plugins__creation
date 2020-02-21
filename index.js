@@ -20,3 +20,12 @@ modalBtn.addEventListener('click', function() {
 	}, 2500)
 })
 
+firstModal.onOpen( () => {
+	console.log('modal has been opened, method onOpen()')
+})
+firstModal.onClose( () => {
+	console.log('modal has been closed, method onClose()')
+})
+firstModal.beforeClose( () => {
+	console.log('now modal is going to be closed, method beforeClose()')
+})

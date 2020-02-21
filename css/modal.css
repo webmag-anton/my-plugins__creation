@@ -3,12 +3,13 @@
 	opacity: 1;
 	z-index: 1;
 	transform: translateY(0);
+	visibility: visible;
 }
 .modal-overlay,
 .modal-window{
 	opacity: 0;
 	z-index: -1;
-	/*transition: .3s ease;*/
+	visibility: hidden;
 }
 
 .modal-overlay{
