@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>progressBar</title>
+	<style>
+		.progress {
+			margin-bottom: 20px;
+		}
+	</style>
+</head>
+<body>
+
+	<div class="progress progress-bar"></div>
+	<div class="progress progress-bar2"></div>
+	<div class="progress progress-bar3"></div>
+	
+	<script src="./progressBar.js"></script>
+
+	<script>
+
+		let firstBar = new ProgressBar({
+			height: 30,
+			end: 70,
+			bg: '#466646'
+		})
+		firstBar.init('.progress-bar')
+
+		let secondBar = new ProgressBar({
+			start: 40,
+			bg: '#5c8db4'
+		})
+		secondBar.init('.progress-bar2')
+
+		let thirdBar = new RoundedProgressBar({
+			start: 0,
+			end: 85,
+			bg: '#eb7159',
+			rounded: '20px'
+		})
+		thirdBar.init('.progress-bar3')
+
+	</script>
+</body>
+</html>
