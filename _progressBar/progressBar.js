@@ -46,7 +46,6 @@ class ProgressBar {
 			color: ${this.textColor};
 		`
 		this.stateProgress(bar) // и задает ширину bar и проценты внутри bar методом stateProgress
-
 		return bar
 	}
 
@@ -74,13 +73,13 @@ class ProgressBar {
 class RoundedProgressBar extends ProgressBar {
 	constructor(options) {
 		super(options)
-		// перед расширением свойств в конструкторе вызывакм метод super
+		// перед расширением свойств в конструкторе вызываем метод super
 		this.rounded = options.rounded || '5px'
 	}
 
 	// изменяем (расширяем) метод createProgressBar
 	createProgressBar() {
-		const progressBar = super.createProgressBar()
+		const progressBar = super.createProgressBar() // вызов родительского методв
 		this.roundedBar(progressBar)
 		return progressBar
 	}
@@ -90,3 +89,20 @@ class RoundedProgressBar extends ProgressBar {
 		elem.style.overflow = 'hidden'
 	}
 }
+
+
+
+
+
+let obj1 = {
+	name: 'name',
+	age: 16,
+	school: {
+		street: 'Donskogo',
+		color: 'yellow'
+	}
+}
+
+let obj2 = {...obj1}
+
+console.log(obj2, obj1 == obj2)
