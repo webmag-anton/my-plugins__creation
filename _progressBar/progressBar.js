@@ -89,20 +89,3 @@ class RoundedProgressBar extends ProgressBar {
 		elem.style.overflow = 'hidden'
 	}
 }
-
-
-
-
-
-let obj1 = {
-	name: 'name',
-	age: 16,
-	school: {
-		street: 'Donskogo',
-		color: 'yellow'
-	}
-}
-
-let obj2 = {...obj1}
-
-console.log(obj2, obj1 == obj2)
