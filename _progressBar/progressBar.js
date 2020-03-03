@@ -77,7 +77,7 @@ class RoundedProgressBar extends ProgressBar {
 		this.rounded = options.rounded || '5px'
 	}
 
-	// изменяем (расширяем) метод createProgressBar
+	// изменяем (расширяем) метод createProgressBar - пример полиморфизма (изменяем одноименный родительский метод)
 	createProgressBar() {
 		const progressBar = super.createProgressBar() // вызов родительского методв
 		this.roundedBar(progressBar)
