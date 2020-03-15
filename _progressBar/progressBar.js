@@ -66,6 +66,8 @@ class ProgressBar {
 			}
 		}
 
+		// requestAnimationFrame выполняет передаваемый в нее callback примерно 
+		// каждые 16,7ms - 60fps ( 1000ms / 60frames = 16.7ms )
 		requestAnimationFrame(animate)
 	}
 
