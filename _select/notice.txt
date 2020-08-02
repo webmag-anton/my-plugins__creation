@@ -1,0 +1,2 @@
+   Для запуска Parcel: parcel index.html - на http://localhost:1234 запустится проект; 
+просто подключаю scss и другие файлы, которые Parcel сам установит
